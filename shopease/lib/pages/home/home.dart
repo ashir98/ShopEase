@@ -47,7 +47,7 @@ Widget build(BuildContext context) {
             10.verticalSpace,
             // -- CAROUSEL SLIDER
             SizedBox(
-              height: 170.h,
+              height: 180.h,
               child: Swiper(
                 itemCount: 3,
                 itemBuilder: (context, index) {
@@ -65,6 +65,7 @@ Widget build(BuildContext context) {
                 ),
               ),
             ),
+            10.verticalSpace,
             // -- CATEGORIES
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,7 +91,7 @@ Widget build(BuildContext context) {
             ),
 
 
-            15.verticalSpace,
+            20.verticalSpace,
             
             
             // -- PRODUCTS
