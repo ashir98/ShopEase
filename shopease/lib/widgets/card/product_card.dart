@@ -3,15 +3,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/colors.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({
+  String title;
+  String imgUrl;
+  double price;
+  double? rating;
+  VoidCallback? onTap;
+
+  ProductCard({
     super.key,
+    required this.title,
+    required this.imgUrl,
+    required this.price,
+    this.rating = 1.1,
+    this.onTap
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-
-      child: Card(
+    return GestureDetector(
+      onTap: onTap,
+      child: SizedBox(
+          child: Card(
         color: Colors.white,
         child: Column(
           children: [
@@ -22,7 +34,7 @@ class ProductCard extends StatelessWidget {
                 child: Card(
                   elevation: 0,
                   color: Color(0xfff3f3f3),
-                  child: Image.network("https://media-ik.croma.com/prod/https://media.croma.com/image/upload/v1697019228/Croma%20Assets/Communication/Mobiles/Images/300665_0_ebmyeq.png"),
+                  child: Image.network(imgUrl),
                 ),
               ),
             ),
@@ -34,29 +46,43 @@ class ProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: double.infinity,
-                      child: Text("Iphone 15 Pro", style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis,)
-                    ),
+                        width: double.infinity,
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                              fontSize: 15.sp, fontWeight: FontWeight.bold),
+                          overflow: TextOverflow.ellipsis,
+                        )),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("\$1000", style: TextStyle(fontSize: 18.sp, color: AppColors.primaryColor),),
+                        Text(
+                          price.toString(),
+                          style: TextStyle(
+                              fontSize: 18.sp, color: AppColors.primaryColor),
+                        ),
                         Row(
                           children: [
-                            Icon(Icons.star_rounded, color: AppColors.secondaryColor, size: 18.sp,),
-                            Text("4.5", style: TextStyle(fontSize: 14.sp),)
+                            Icon(
+                              Icons.star_rounded,
+                              color: AppColors.secondaryColor,
+                              size: 18.sp,
+                            ),
+                            Text(
+                              rating.toString(),
+                              style: TextStyle(fontSize: 14.sp),
+                            )
                           ],
                         )
                       ],
                     )
-                
                   ],
                 ),
               ),
             )
           ],
         ),
-      )
-      );
+      )),
+    );
   }
 }

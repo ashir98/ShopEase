@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/colors.dart';
 import 'package:shopease/constants/images.dart';
 import 'package:shopease/constants/padding_sizes.dart';
+import 'package:shopease/pages/product_detail/product_detail.dart';
 import 'package:shopease/utils/helper_functions.dart';
 import 'package:shopease/widgets/buttons/category_button.dart';
 import 'package:shopease/widgets/buttons/text_button.dart';
@@ -111,7 +112,15 @@ Widget build(BuildContext context) {
               itemCount: 5,
               shrinkWrap: true, // Add this line to enable scrolling within the GridView
               itemBuilder: (context, index) {
-                return ProductCard();
+                return ProductCard(
+                  title: "Iphone 15 Pro",
+                  imgUrl: "https://media-ik.croma.com/prod/https://media.croma.com/image/upload/v1697019228/Croma%20Assets/Communication/Mobiles/Images/300665_0_ebmyeq.png",
+                  price: 1500,
+                  rating: 4.3,
+                  onTap: () {
+                    gotoPage(ProductDetailPage(), context);
+                  },
+                );
               },
             ),
           ],

@@ -44,7 +44,7 @@ class CartPage extends StatelessWidget {
               
               
                     Expanded(
-                      flex: 4,
+                      flex: 5,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10).r,
                         child: Column(

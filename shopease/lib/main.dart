@@ -46,7 +46,7 @@ class ShopEase extends StatelessWidget {
         return  MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'ShopEase',
-        home: ScreenNavigation(),
+        home: SplashScreen(),
         theme: lightTheme,
       );
       },
