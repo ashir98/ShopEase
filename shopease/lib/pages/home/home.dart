@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/images.dart';
 import 'package:shopease/constants/padding_sizes.dart';
+<<<<<<< HEAD
+=======
+import 'package:shopease/pages/product_detail/product_detail.dart';
+import 'package:shopease/utils/helper_functions.dart';
+>>>>>>> e9eda6b663a9e4ab453d44769664202dcc34838a
 import 'package:shopease/widgets/buttons/category_button.dart';
 import 'package:shopease/widgets/buttons/text_button.dart';
 import 'package:shopease/widgets/card/carousel_card.dart';
@@ -45,7 +50,7 @@ Widget build(BuildContext context) {
             10.verticalSpace,
             // -- CAROUSEL SLIDER
             SizedBox(
-              height: 170.h,
+              height: 180.h,
               child: Swiper(
                 itemCount: 3,
                 itemBuilder: (context, index) {
@@ -64,6 +69,7 @@ Widget build(BuildContext context) {
                 ),
               ),
             ),
+            10.verticalSpace,
             // -- CATEGORIES
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,7 +95,7 @@ Widget build(BuildContext context) {
             ),
 
 
-            15.verticalSpace,
+            20.verticalSpace,
             
             
             // -- PRODUCTS
@@ -109,7 +115,15 @@ Widget build(BuildContext context) {
               itemCount: 5,
               shrinkWrap: true, // Add this line to enable scrolling within the GridView
               itemBuilder: (context, index) {
-                return ProductCard();
+                return ProductCard(
+                  title: "Iphone 15 Pro",
+                  imgUrl: "https://media-ik.croma.com/prod/https://media.croma.com/image/upload/v1697019228/Croma%20Assets/Communication/Mobiles/Images/300665_0_ebmyeq.png",
+                  price: 1500,
+                  rating: 4.3,
+                  onTap: () {
+                    gotoPage(ProductDetailPage(), context);
+                  },
+                );
               },
             ),
           ],
