@@ -2,10 +2,8 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shopease/constants/colors.dart';
 import 'package:shopease/constants/images.dart';
 import 'package:shopease/constants/padding_sizes.dart';
-import 'package:shopease/utils/helper_functions.dart';
 import 'package:shopease/widgets/buttons/category_button.dart';
 import 'package:shopease/widgets/buttons/text_button.dart';
 import 'package:shopease/widgets/card/carousel_card.dart';
@@ -51,6 +49,7 @@ Widget build(BuildContext context) {
               child: Swiper(
                 itemCount: 3,
                 itemBuilder: (context, index) {
+                  print("build");
                   return CarouselCard();
                 },
                 autoplay: true,

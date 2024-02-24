@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopease/pages/navigation.dart';
 import 'package:shopease/pages/welcome/splash.dart';
 import 'package:shopease/provider/app_provider.dart';
 import 'package:shopease/themes/light_theme.dart';
@@ -45,7 +46,7 @@ class ShopEase extends StatelessWidget {
         return  MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'ShopEase',
-        home: SplashScreen(),
+        home: ScreenNavigation(),
         theme: lightTheme,
       );
       },
