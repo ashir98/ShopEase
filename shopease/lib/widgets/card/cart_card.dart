@@ -13,7 +13,7 @@ class CartItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 120.h,
+      height: 110.h,
       child: Card(
         elevation: 0.2,
         color: Colors.white,
@@ -42,6 +42,7 @@ class CartItemWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10).r,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                 
                     Row(
@@ -73,7 +74,7 @@ class CartItemWidget extends StatelessWidget {
                               },
                               color: AppColors.primaryColor,
                               
-                              icon: Icon(Icons.remove, size: 18.sp,),
+                              icon: Icon(FluentIcons.subtract_square_24_filled, size: 25.sp,),
                             ),
                             Text("1", style: TextStyle(color: AppColors.primaryColor, fontSize: 16.sp),),
                 
@@ -82,7 +83,7 @@ class CartItemWidget extends StatelessWidget {
                                 
                               },
                               color: AppColors.primaryColor,
-                              icon: Icon(Icons.add, size: 18.sp,),
+                              icon: Icon(FluentIcons.add_square_24_filled, size:25.sp,),
                             ),
                 
                 

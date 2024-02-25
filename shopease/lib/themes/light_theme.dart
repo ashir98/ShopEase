@@ -13,15 +13,25 @@ ThemeData lightTheme = ThemeData.light().copyWith(
 
         border: InputBorder.none,
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(8), // Adjust the value as needed
+          borderSide: BorderSide(color: AppColors.primaryColor, width: 0.7)
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(8), // Adjust the value as needed
+          borderSide: BorderSide(color: AppColors.primaryColor, width: 0.7) 
         ),
-        fillColor: Colors.grey.shade300,
-        filled: true,
+
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8), // Adjust the value as needed
+          borderSide: BorderSide(color: Colors.red, width: 0.7) 
+        ),
+
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8), // Adjust the value as needed
+          borderSide: BorderSide(color: Colors.red, width: 0.7) 
+        ),
+
+
         contentPadding: EdgeInsets.symmetric(vertical: 5),
         hintStyle: TextStyle(color: Colors.grey.shade400)
 

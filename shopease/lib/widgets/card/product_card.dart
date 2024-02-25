@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/colors.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class ProductCard extends StatelessWidget {
   String title;
@@ -34,7 +35,11 @@ class ProductCard extends StatelessWidget {
                 child: Card(
                   elevation: 0,
                   color: Color(0xfff3f3f3),
-                  child: Image.network(imgUrl),
+                  child: FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage,
+                      image: imgUrl,
+                      fadeInDuration: const Duration(milliseconds: 300),
+                    ),
                 ),
               ),
             ),

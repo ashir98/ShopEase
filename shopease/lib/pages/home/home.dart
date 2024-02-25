@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/images.dart';
 import 'package:shopease/constants/padding_sizes.dart';
-<<<<<<< HEAD
-=======
 import 'package:shopease/pages/product_detail/product_detail.dart';
 import 'package:shopease/utils/helper_functions.dart';
->>>>>>> e9eda6b663a9e4ab453d44769664202dcc34838a
 import 'package:shopease/widgets/buttons/category_button.dart';
 import 'package:shopease/widgets/buttons/text_button.dart';
 import 'package:shopease/widgets/card/carousel_card.dart';
@@ -41,6 +38,17 @@ Widget build(BuildContext context) {
             // -- SEARCH BAR
             TextField(
               decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+
+                enabledBorder:  OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+                fillColor: Colors.grey.shade100,
+                filled: true,
                 prefixIcon: Icon(FluentIcons.search_16_regular, color: Colors.grey.shade500),
                 hintText: "Search",
               ),

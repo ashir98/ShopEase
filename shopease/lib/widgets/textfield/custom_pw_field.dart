@@ -1,6 +1,7 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shopease/constants/colors.dart';
 
 class CustomPasswordField extends StatelessWidget {
   
@@ -37,10 +38,10 @@ class CustomPasswordField extends StatelessWidget {
         
           contentPadding: EdgeInsets.symmetric(vertical: 15).r,
           hintText: hintText,
-          prefixIcon: Icon( prefixIcon ),
+          prefixIcon: Icon( prefixIcon, color: Colors.grey.shade500, ),
           suffixIcon: IconButton(
             onPressed: passwordToggle,
-            icon: Icon(  obscureText?   FluentIcons.eye_16_regular  :   FluentIcons.eye_off_16_regular),
+            icon: Icon(  obscureText?   FluentIcons.eye_16_regular  :   FluentIcons.eye_off_16_regular, color: AppColors.primaryColor,),
           )
       ),
 

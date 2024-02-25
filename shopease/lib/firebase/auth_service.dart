@@ -12,34 +12,31 @@ class AuthService{
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _db = FirebaseFirestore.instance;
 
-
-
   // -- USER SIGN UP
   Future signup(String firstName, lastName, phone,email, password,  BuildContext context)async{
-    await _auth
-    .createUserWithEmailAndPassword(email: email, password: password)
-    .then((value){
+   try {
+      UserCredential credential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      User user = credential.user!;
+      
 
-      _auth.currentUser!.sendEmailVerification();
-
-      displayMessage("A verification email has been sent to your email", context);
-
-
-      _db.collection('users')
-      .doc(_auth.currentUser!.uid)
-      .set({
-        'id' : _auth.currentUser!.uid,
-        'firstName' : firstName,
-        'lastName' : lastName,
-        'phone':phone,
-        'email':email,
-        'isVerified' : false
-
+      // Create a new document in Firestore for the user
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        'firstName': firstName,
+        'lastName': lastName,
+        'phone': phone,
+        'email': email,
+        'verificationStatus': false, // Initially set to false
       });
 
-    }).catchError( (error){
-      displayMessage(error, context);
-    } );
+      // Send email verification
+      await user.sendEmailVerification().then((value) {
+        displayMessage("A verification email has been sent to your email", context);
+      });
+      
+
+    } catch (error) {
+      displayMessage(error.toString(), context);
+    }
 
 
   }
@@ -58,30 +55,28 @@ class AuthService{
 
   // -- USER SIGN IN
   Future signIn(String email, password, BuildContext context )async{
-    _auth
-    .signInWithEmailAndPassword(email: email, password: password);
+   try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      User user = result.user!;
 
-    User? user = _auth.currentUser;
+      // Check if email is verified
+      if (user.emailVerified) {
+        removeAllAndGotoPage(ScreenNavigation() , context);
 
-    if (user!=null && user.emailVerified) {
-      _db
-      .collection('users')
-      .doc(_auth.currentUser!.uid)
-      .set({
-        'isVerified' : true
+        displayMessage("Logged in as "+user.email.toString(), context);
+
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
+        'verificationStatus': true, // Initially set to false
       });
 
-      displayMessage("Logged in as ${_auth.currentUser!.email}", context);
 
 
-
-
-      
-    }else{
-
-      displayMessage("Email not verified, please verify your email", context);
+      } else {
+        displayMessage("Email not verified", context);
+      }
+    } catch (error) {
+      displayMessage(error.toString(), context);
     }
-    
   }
 
 }

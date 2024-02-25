@@ -17,21 +17,14 @@ class CartPage extends StatelessWidget {
       ),
 
 
-      body: Column(
-        children: [
-          Padding(
-            padding: defaultPadding,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return CartItemWidget();
-              },
-            ),
-          ),
-
-
-          CartCheckOutButton()
-        ],
+      body: Padding(
+        padding: defaultPadding,
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return CartItemWidget();
+          },
+        ),
       ),
     );
   }

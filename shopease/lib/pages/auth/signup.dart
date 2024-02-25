@@ -9,8 +9,8 @@ import 'package:shopease/pages/auth/login.dart';
 import 'package:shopease/provider/app_provider.dart';
 import 'package:shopease/utils/helper_functions.dart';
 import 'package:shopease/widgets/buttons/custom_button.dart';
-import 'package:shopease/widgets/text/subtitle.dart';
 import 'package:shopease/widgets/text/heading.dart';
+import 'package:shopease/widgets/text/subtitle.dart';
 import 'package:shopease/widgets/textfield/custom_pw_field.dart';
 import 'package:shopease/widgets/textfield/custom_textfield.dart';
 
@@ -51,7 +51,7 @@ class SignUpPage extends StatelessWidget {
             
             
                 // -- HEADING
-                // TitleText(text: "Create an account"),
+                HeadingText(text: "Create an account", fontSize: 25.sp,),
             
                 SizedBox(
                   height: getScreenHeight(context) *0.002,
@@ -214,6 +214,7 @@ class SignUpPage extends StatelessWidget {
                       )
                       .then((value) {
                         value.setLoading(false);
+                        
                         gotoPage( LoginPage(), context);
                         
 

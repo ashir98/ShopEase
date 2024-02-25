@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -6,6 +7,7 @@ class CustomTextField extends StatelessWidget {
   TextEditingController? controller;
   String? hintText;
   IconData? prefixIcon;
+  GlobalKey<FormState>? formkey;
   String? Function(String? value)? validator;
   
 
@@ -16,7 +18,8 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.hintText,
     this.prefixIcon,
-    this.validator
+    this.formkey,
+    this.validator,
 
   });
 
@@ -29,10 +32,18 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 15).r,
           hintText: hintText,
-          prefixIcon: Icon( prefixIcon  )
+          prefixIcon: Icon( prefixIcon, color: Colors.grey.shade500,  )
       ),
 
       validator:  validator,
+
+      
+
+
+
+
+
+
     );
   }
 }

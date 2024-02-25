@@ -1,30 +1,14 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-
-class ProductDetail extends StatelessWidget {
-  const ProductDetail({super.key});
-=======
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/colors.dart';
+import 'package:shopease/widgets/text/heading.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({super.key});
->>>>>>> e9eda6b663a9e4ab453d44769664202dcc34838a
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      appBar: AppBar(
-        title: Text("Categories"),
-      ),
-
-
-
-      body: Column(
-        children: [
-          
-=======
 
       appBar: AppBar(
         title: Text("Product Details"),
@@ -49,6 +33,7 @@ class ProductDetailPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16).r,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // -- PRODUCT TITLE AND QUANTITY
                 Row(
@@ -88,16 +73,24 @@ class ProductDetailPage extends StatelessWidget {
 
 
 
-                    // -- RATING
+                    
+                    
+                  ],
+                ),
+
+ 
+                // -- RATING
                     
 
 
-                    // -- COLOR
+                // -- COLOR
 
 
-                    // -- DESCRIPTION
-                  ],
-                ),
+                // -- DESCRIPTION
+                HeadingText(text: "Description", fontSize: 18.sp),
+
+
+
               ],
             ),
           )
@@ -106,17 +99,12 @@ class ProductDetailPage extends StatelessWidget {
           
 
 
->>>>>>> e9eda6b663a9e4ab453d44769664202dcc34838a
         ],
       ),
 
 
     );
   }
-<<<<<<< HEAD
-}
-=======
 }
 
 
->>>>>>> e9eda6b663a9e4ab453d44769664202dcc34838a

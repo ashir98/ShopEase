@@ -48,12 +48,12 @@ class ProfilePage extends StatelessWidget {
                   // -- NAME
                   Text(
                     "Syed Ashir Ali",
-                    style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
                   )
                 ],
               ),
 
-              15.verticalSpace,
+              20.verticalSpace,
           
           
           
