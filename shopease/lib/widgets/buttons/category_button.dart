@@ -4,34 +4,46 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/colors.dart';
 import 'package:shopease/utils/helper_functions.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class CategoryButton extends StatelessWidget {
-  const CategoryButton({
+  String name;
+  String icon;
+  VoidCallback onTap;
+
+  CategoryButton({
     super.key,
+    required this.icon,
+    required this.name,
+    required this.onTap
+
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-       Expanded(
-         child: SizedBox(
-           height: 60.h,
-           width: 60.w,
-           child: Card(
-             elevation: 0,
-             color: AppColors.primaryColor.withOpacity(0.2),
-             child: Center(
-               child: Icon(FluentIcons.phone_24_filled, color: AppColors.primaryColor, size: 35.sp,),
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+         Expanded(
+           child: SizedBox(
+             height: 60.h,
+             width: 60.w,
+             child: Card(
+               elevation: 0,
+               color: AppColors.primaryColor.withOpacity(0.2),
+               child: Center(
+                 child: FadeInImage.memoryNetwork(placeholder: kTransparentImage, image: icon, width: 30.w, height: 30.h,)
+               ),
              ),
            ),
          ),
-       ),
-    
-       Text("SmartPhone", style: TextStyle(color: AppColors.primaryColor, fontSize: 11.sp, fontWeight: FontWeight.w600),)
-    
-    
-      ],
+      
+         Text(name, style: TextStyle(color: AppColors.primaryColor, fontSize: 11.sp, fontWeight: FontWeight.w600),)
+      
+      
+        ],
+      ),
     );
   }
 }

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/images.dart';
 import 'package:shopease/constants/padding_sizes.dart';
+import 'package:shopease/firebase/firestore/firestore_service.dart';
+import 'package:shopease/models/category_model.dart';
 import 'package:shopease/pages/product_detail/product_detail.dart';
 import 'package:shopease/utils/helper_functions.dart';
 import 'package:shopease/widgets/buttons/category_button.dart';
@@ -13,7 +15,12 @@ import 'package:shopease/widgets/card/product_card.dart';
 import 'package:shopease/widgets/text/title.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+
+  FireStoreService _fireStoreService = FireStoreService();
+
+
 
   @override
 Widget build(BuildContext context) {
@@ -93,14 +100,31 @@ Widget build(BuildContext context) {
                 )
               ],
             ),
-            GridView.builder(
-              shrinkWrap: true,
-              gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4, ),
-              itemCount: 4,
-              itemBuilder: (context, index) {
-                return CategoryButton();
-              },
-            ),
+
+            StreamBuilder<List<CategoryModel>>(
+                stream: _fireStoreService.getCategories(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center( child:  CircularProgressIndicator(),);
+                  } else {
+                    return GridView.builder(
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4,),
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return CategoryButton(
+                        icon: snapshot.data![index].icon,
+                        name: snapshot.data![index].name,
+                        onTap: () {
+                          
+                        },
+                      );
+                    },
+                  );
+                  }
+                },
+              ),
+            
 
 
             20.verticalSpace,

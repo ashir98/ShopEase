@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shopease/constants/images.dart';
-import 'package:shopease/firebase/auth_service.dart';
+import 'package:shopease/firebase/auth_service/auth_service.dart';
 import 'package:shopease/pages/navigation.dart';
 import 'package:shopease/provider/app_provider.dart';
 import 'package:shopease/utils/helper_functions.dart';

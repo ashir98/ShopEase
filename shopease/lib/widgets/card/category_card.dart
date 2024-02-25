@@ -4,19 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/images.dart';
 import 'package:shopease/widgets/text/subtitle.dart';
 import 'package:shopease/widgets/text/title.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class CategoryCard extends StatelessWidget {
 
-  String imgUrl;
-  String title;
-  String subtitle;
+  String imageUrl;
+  String name;
+  String description;
   VoidCallback onTap;
 
   CategoryCard({
     super.key,
-    required this.imgUrl,
-    required this.title,
-    required this.subtitle,
+    required this.imageUrl,
+    required this.name,
+    required this.description,
     required this.onTap
   });
 
@@ -36,9 +37,10 @@ class CategoryCard extends StatelessWidget {
               
               // -- EXPANDED
               Expanded(
-                child: Image.asset(
-                  AppImages.welcome
-                ),
+                child: FadeInImage.memoryNetwork(
+                  placeholder: kTransparentImage, 
+                  image: imageUrl
+                )
               ),
                   
                   
@@ -47,8 +49,8 @@ class CategoryCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TitleText(text: title),
-                    SubtitleText(text: subtitle, fontSize: 14.sp)
+                    TitleText(text: name),
+                    SubtitleText(text: description, fontSize: 14.sp)
                     
                   ],
                 ),

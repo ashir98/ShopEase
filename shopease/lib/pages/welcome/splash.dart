@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/colors.dart';
 import 'package:shopease/constants/images.dart';
-import 'package:shopease/firebase/auth_state.dart';
+import 'package:shopease/firebase/auth_service/auth_state.dart';
 import 'package:shopease/pages/welcome/welcome.dart';
 import 'package:shopease/utils/helper_functions.dart';
 
