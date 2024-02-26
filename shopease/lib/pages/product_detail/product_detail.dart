@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/colors.dart';
 import 'package:shopease/widgets/text/heading.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  const ProductDetailPage({super.key});
+
+  String id;
+  String name;
+  String imageUrl;
+  String description;
+
+
+
+  ProductDetailPage({
+    super.key,
+    required this.id,
+    required this.name,
+    required this.imageUrl,
+    required this.description
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +35,16 @@ class ProductDetailPage extends StatelessWidget {
         children: [
 
           // -- PICTURE
-          SizedBox(
-            height: 250.h,
-            width: double.infinity,
-            child: Card(
-              color: AppColors.imgBgColor,
-              child: Image.network("https://media-ik.croma.com/prod/https://media.croma.com/image/upload/v1697019228/Croma%20Assets/Communication/Mobiles/Images/300665_0_ebmyeq.png"),
+          Hero(
+            tag: id,
+            child: SizedBox(
+              height: 250.h,
+              width: double.infinity,
+              child: Card(
+                elevation: 0,
+                color: Color(0xfff3f3f3),
+                child: FadeInImage.memoryNetwork(placeholder: kTransparentImage, image: imageUrl)
+              ),
             ),
           ),
 

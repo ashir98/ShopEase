@@ -4,16 +4,18 @@ import 'package:shopease/constants/colors.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class ProductCard extends StatelessWidget {
-  String title;
-  String imgUrl;
+  String id;
+  String name;
+  String imageUrl;
   double price;
   double? rating;
   VoidCallback? onTap;
 
   ProductCard({
     super.key,
-    required this.title,
-    required this.imgUrl,
+    required this.id,
+    required this.name,
+    required this.imageUrl,
     required this.price,
     this.rating = 1.1,
     this.onTap
@@ -26,52 +28,56 @@ class ProductCard extends StatelessWidget {
       child: SizedBox(
           child: Card(
         color: Colors.white,
+        surfaceTintColor: Colors.white,
         child: Column(
           children: [
             Expanded(
               flex: 3,
               child: Padding(
-                padding: const EdgeInsets.all(5.0).r,
-                child: Card(
-                  elevation: 0,
-                  color: Color(0xfff3f3f3),
-                  child: FadeInImage.memoryNetwork(
-                      placeholder: kTransparentImage,
-                      image: imgUrl,
-                      fadeInDuration: const Duration(milliseconds: 300),
-                    ),
+                padding: const EdgeInsets.only(top:5.0,  left: 5,  right: 5).r,
+                child: Hero(
+                  tag: id,
+                  child: Card(
+                    elevation: 0,
+                    color: Color(0xfff3f3f3),
+                    child: FadeInImage.memoryNetwork(
+                        placeholder: kTransparentImage,
+                        image: imageUrl,
+                        fadeInDuration: const Duration(milliseconds: 300),
+                      ),
+                  ),
                 ),
               ),
             ),
             Expanded(
               flex: 1,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 8).r,
+                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8).r,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
                         width: double.infinity,
                         child: Text(
-                          title,
+                          name,
                           style: TextStyle(
-                              fontSize: 15.sp, fontWeight: FontWeight.bold),
+                              fontSize: 16.sp, fontWeight: FontWeight.w400),
                           overflow: TextOverflow.ellipsis,
                         )),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          price.toString(),
-                          style: TextStyle(
-                              fontSize: 18.sp, color: AppColors.primaryColor),
+                          "Rs.$price",
+                          style: TextStyle( fontSize: 16.sp, fontWeight: FontWeight.w400,color: AppColors.primaryColor),
                         ),
                         Row(
                           children: [
                             Icon(
                               Icons.star_rounded,
                               color: AppColors.secondaryColor,
-                              size: 18.sp,
+                              size: 16.sp,
                             ),
                             Text(
                               rating.toString(),

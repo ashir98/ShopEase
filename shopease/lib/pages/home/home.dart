@@ -6,6 +6,7 @@ import 'package:shopease/constants/images.dart';
 import 'package:shopease/constants/padding_sizes.dart';
 import 'package:shopease/firebase/firestore/firestore_service.dart';
 import 'package:shopease/models/category_model.dart';
+import 'package:shopease/models/product_model.dart';
 import 'package:shopease/pages/product_detail/product_detail.dart';
 import 'package:shopease/utils/helper_functions.dart';
 import 'package:shopease/widgets/buttons/category_button.dart';
@@ -141,23 +142,60 @@ Widget build(BuildContext context) {
                 )
               ],
             ),
-            GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.6.h),
-              itemCount: 5,
-              shrinkWrap: true, // Add this line to enable scrolling within the GridView
-              itemBuilder: (context, index) {
-                return ProductCard(
-                  title: "Iphone 15 Pro",
-                  imgUrl: "https://media-ik.croma.com/prod/https://media.croma.com/image/upload/v1697019228/Croma%20Assets/Communication/Mobiles/Images/300665_0_ebmyeq.png",
-                  price: 1500,
-                  rating: 4.3,
-                  onTap: () {
-                    gotoPage(ProductDetailPage(), context);
-                  },
-                );
+
+
+            // -- PRODUCTS STREAM
+            StreamBuilder<List<ProductModel>>(
+              stream: _fireStoreService.getPopularProducts(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+
+                  print(snapshot.data);
+                  return Center(child: CircularProgressIndicator(),);
+                } else {
+
+                  return GridView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, childAspectRatio: 0.6.h),
+                      itemCount: 5,
+                      shrinkWrap:true, // Add this line to enable scrolling within the GridView
+                      itemBuilder: (context, index) {
+                        var id = snapshot.data![index].id;
+                        var name = snapshot.data![index].name;
+                        var imageUrl = snapshot.data![index].imageUrl;
+                        var description = snapshot.data![index].description;
+                        var price = snapshot.data![index].price;
+                        var rating = snapshot.data![index].rating;
+                        var isFav = snapshot.data![index].isFav;
+                        var status = snapshot.data![index].status;
+
+
+                        print(snapshot.data!.length.toString());
+
+
+                        return ProductCard(
+                          id: id,
+                          name:  name ,
+                          imageUrl:  imageUrl,
+                          price: price.toDouble(),
+                          rating: rating,
+                          onTap: () {
+                            gotoPage(ProductDetailPage(id: id, name: name, imageUrl: imageUrl,description: description,), context);
+                          },
+                        );
+                      },
+                    );
+                  
+                }
               },
-            ),
+
+            )
+
+
+
+
+            
           ],
         ),
       ),

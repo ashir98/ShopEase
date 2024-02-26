@@ -1,34 +1,37 @@
 class ProductModel{
   String id;
-  String title;
+  String name;
   String imageUrl;
   String description;
   String status;
+  double rating;
+  int price;
   bool isFav;
-  double price;
 
 
   ProductModel({
 
     required this.id,
-    required this.title,
+    required this.name,
     required this.imageUrl,
     required this.description,
     required this.status,
     required this.isFav,
-    required this.price
+    required this.price,
+    required this.rating
   });
 
 
   factory ProductModel.fromJson(Map<String, dynamic> map){
     return ProductModel(
       id: map['id'], 
-      title: map['title'], 
+      name: map['name'], 
       imageUrl: map['imageUrl'], 
       description: map['description'], 
       status: map['status'], 
       isFav: map['isFav'], 
-      price: map['price']
+      price: map['price'],
+      rating: map['rating']
     );
   }
 
@@ -39,12 +42,13 @@ class ProductModel{
 
     return {
       'id' : id,
-      'title' :title,
+      'name' : name,
       'imageUrl' : imageUrl,
       'description':description,
       'status' : status,
       'isFav' : isFav,
-      'price' : price
+      'price' : price,
+      'rating' : rating
     };
 
   }
