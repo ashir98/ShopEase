@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/colors.dart';
 import 'package:shopease/constants/padding_sizes.dart';
+import 'package:shopease/pages/favourites/favouites_page.dart';
+import 'package:shopease/utils/helper_functions.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -64,6 +66,9 @@ class ProfilePage extends StatelessWidget {
                 itemCount: profileOptions.length,
                 itemBuilder: (context, index) {
                   return ListTile(
+                    onTap: (){
+                      gotoPage( profileOptions[index].page, context);
+                    },
                     leading: Icon(profileOptions[index].icon),
                     title: Text( profileOptions[index].title ),
                     trailing: Icon(Icons.arrow_forward_ios_rounded),
@@ -98,10 +103,13 @@ class ProfilePage extends StatelessWidget {
 class ProfileTileModel{
   IconData icon;
   String title;
+  dynamic page;
 
   ProfileTileModel({
     required this.title,
-    required this.icon
+    required this.icon,
+    required this.page
+
   });
 
 
@@ -115,35 +123,43 @@ class ProfileTileModel{
 List<ProfileTileModel> profileOptions = [
   ProfileTileModel(
     title: "My Account", 
-    icon: FluentIcons.person_16_regular
+    icon: FluentIcons.person_16_regular,
+    page: FavouritePage()
   ),
   ProfileTileModel(
     title: "My Order", 
-    icon: FluentIcons.shopping_bag_16_regular
+    icon: FluentIcons.shopping_bag_16_regular,
+    page: FavouritePage()
   ),
   ProfileTileModel(
     title: "My Address", 
-    icon: FluentIcons.location_16_regular
+    icon: FluentIcons.location_16_regular,
+    page: FavouritePage()
   ),
   ProfileTileModel(
     title: "My Account", 
-    icon: FluentIcons.person_16_regular
+    icon: FluentIcons.person_16_regular,
+    page: FavouritePage()
   ),
   ProfileTileModel(
     title: "Payment Method", 
-    icon: FluentIcons.payment_16_regular
+    icon: FluentIcons.payment_16_regular,
+    page: FavouritePage()
   ),
   ProfileTileModel(
     title: "My Wishlist", 
-    icon: FluentIcons.heart_16_regular
+    icon: FluentIcons.heart_16_regular,
+    page: FavouritePage()
   ),
   ProfileTileModel(
     title: "Account Settings", 
-    icon: FluentIcons.settings_16_regular
+    icon: FluentIcons.settings_16_regular,
+    page: FavouritePage()
   ),
   ProfileTileModel(
     title: "Logout", 
-    icon: FluentIcons.sign_out_20_regular
+    icon: FluentIcons.sign_out_20_regular,
+    page: FavouritePage()
   ),
 
 ];

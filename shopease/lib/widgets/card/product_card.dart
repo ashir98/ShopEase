@@ -1,3 +1,6 @@
+
+
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/colors.dart';
@@ -10,6 +13,10 @@ class ProductCard extends StatelessWidget {
   double price;
   double? rating;
   VoidCallback? onTap;
+  bool isFav;
+  VoidCallback? addToFav;
+
+
 
   ProductCard({
     super.key,
@@ -18,7 +25,10 @@ class ProductCard extends StatelessWidget {
     required this.imageUrl,
     required this.price,
     this.rating = 1.1,
-    this.onTap
+    this.onTap,
+    required this.isFav,
+    this.addToFav
+    
   });
 
   @override
@@ -37,14 +47,34 @@ class ProductCard extends StatelessWidget {
                 padding: const EdgeInsets.only(top:5.0,  left: 5,  right: 5).r,
                 child: Hero(
                   tag: id,
-                  child: Card(
-                    elevation: 0,
-                    color: Color(0xfff3f3f3),
-                    child: FadeInImage.memoryNetwork(
-                        placeholder: kTransparentImage,
-                        image: imageUrl,
-                        fadeInDuration: const Duration(milliseconds: 300),
+                  child: Stack(
+                    alignment: Alignment.topRight,
+                    children: [
+                      SizedBox(
+                        height: 200.h,
+                        width: double.infinity,
+                        child: Card(
+                          elevation: 0,
+                          color: Color(0xfff3f3f3),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20).r,
+                            child: FadeInImage.memoryNetwork(
+                                placeholder: kTransparentImage,
+                                image: imageUrl,
+                                fadeInDuration: const Duration(milliseconds: 300),
+                              ),
+                          ),
+                        ),
                       ),
+
+                      IconButton(
+                        onPressed: addToFav,
+                        icon: Icon(
+                          isFav? FluentIcons.heart_16_filled: FluentIcons.heart_16_regular, 
+                          color: Colors.red,
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
