@@ -27,24 +27,28 @@ class AppChangeNotifier extends ChangeNotifier{
 
 
 
-  // -- FAV BUTTON
-  Map<String, bool> _favorites = {};
 
-  // Method to check if a product with given id is marked as favorite
-  bool isFav(String productId) {
-    return _favorites.containsKey(productId) ? _favorites[productId]! : false;
-  }
 
-  // Method to toggle favorite status of a product with given id
-  void addToFav(String productId) {
-    if (_favorites.containsKey(productId)) {
-      _favorites[productId] = !_favorites[productId]!;
-    } else {
-      _favorites[productId] = true;
-    }
-    notifyListeners();
-  }
   
+
+Set<String> _favourites = {}; // Store product IDs in a set for efficient membership testing
+
+  Set<String> get favourites => _favourites;
+
+  // Function to toggle the isFav status of a product
+  void toggleFavourite(String productId) {
+    if (_favourites.contains(productId)) {
+      _favourites.remove(productId);
+    } else {
+      _favourites.add(productId);
+    }
+    notifyListeners(); // Notify listeners after the status changes
+  }
+
+  // Function to check if a product is a favorite
+  bool isFavourite(String productId) {
+    return _favourites.contains(productId);
+  }
 
 
 }

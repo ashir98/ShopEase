@@ -26,12 +26,16 @@ class AuthService{
         'phone': phone,
         'email': email,
         'verificationStatus': false, // Initially set to false
+        'favourites' : []
       });
 
       // Send email verification
       await user.sendEmailVerification().then((value) {
         displayMessage("A verification email has been sent to your email", context);
       });
+
+
+      _auth.signOut();
       
 
     } catch (error) {

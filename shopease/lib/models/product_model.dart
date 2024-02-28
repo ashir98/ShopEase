@@ -6,7 +6,6 @@ class ProductModel{
   String status;
   double rating;
   int price;
-  bool isFav;
 
 
   ProductModel({
@@ -16,7 +15,6 @@ class ProductModel{
     required this.imageUrl,
     required this.description,
     required this.status,
-    required this.isFav,
     required this.price,
     required this.rating
   });
@@ -29,7 +27,6 @@ class ProductModel{
       imageUrl: map['imageUrl'], 
       description: map['description'], 
       status: map['status'], 
-      isFav: map['isFav'], 
       price: map['price'],
       rating: map['rating']
     );
@@ -46,7 +43,6 @@ class ProductModel{
       'imageUrl' : imageUrl,
       'description':description,
       'status' : status,
-      'isFav' : isFav,
       'price' : price,
       'rating' : rating
     };

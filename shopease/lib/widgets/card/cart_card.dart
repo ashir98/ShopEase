@@ -13,7 +13,7 @@ class CartItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 110.h,
+      height: 120.h,
       child: Card(
         elevation: 0.2,
         color: Colors.white,

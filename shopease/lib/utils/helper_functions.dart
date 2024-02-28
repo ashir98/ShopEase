@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shopease/constants/colors.dart';
 
 
 
@@ -35,7 +36,12 @@ import 'package:page_transition/page_transition.dart';
   displayMessage(String message, BuildContext context ){
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message))
+      
+      SnackBar(
+        content: Text(message, style: TextStyle(color: AppColors.primaryColor),),
+        backgroundColor: Colors.white,
+
+      )
     );
   }
 
