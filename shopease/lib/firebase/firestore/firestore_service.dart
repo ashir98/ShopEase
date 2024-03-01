@@ -18,6 +18,7 @@ class FireStoreService{
     
     _firestore
     .collection('categories')
+    .orderBy('name', descending: true)
     .snapshots()
     .map((snapshot){
 

@@ -16,8 +16,8 @@ import 'package:shopease/constants/colors.dart';
   }
 
 
-  gotoPage(Widget page ,BuildContext context){
-    Navigator.push(context, PageTransition(child: page, type: PageTransitionType.fade));
+  gotoPage(Widget page ,BuildContext context,{PageTransitionType transition = PageTransitionType.fade}){
+    Navigator.push(context, PageTransition(child: page, type: transition));
   }
 
 
@@ -38,12 +38,49 @@ import 'package:shopease/constants/colors.dart';
     ScaffoldMessenger.of(context).showSnackBar(
       
       SnackBar(
+        duration: Duration(seconds: 1),
         content: Text(message, style: TextStyle(color: AppColors.primaryColor),),
         backgroundColor: Colors.white,
 
       )
     );
   }
+
+
+
+
+  showAlertDialouge( BuildContext context, {required String title, required content,required VoidCallback? onConfirm, } ){
+    showDialog(
+                        context: context, 
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(title),
+                            content: Text(content),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('No'),
+                              ),
+                              TextButton(
+                                onPressed: onConfirm,
+                                child: Text('Yes'),
+                              )
+                            ],
+                          );
+                        },
+                      );
+  }
+
+
+
+
+
+
+
+
+
 
 
 

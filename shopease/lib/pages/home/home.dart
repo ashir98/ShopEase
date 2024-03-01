@@ -2,12 +2,14 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:shopease/constants/images.dart';
 import 'package:shopease/constants/padding_sizes.dart';
 import 'package:shopease/firebase/firestore/firestore_service.dart';
 import 'package:shopease/models/category_model.dart';
 import 'package:shopease/models/product_model.dart';
+import 'package:shopease/pages/categories/categories.dart';
 import 'package:shopease/pages/product_detail/product_detail.dart';
 import 'package:shopease/provider/app_provider.dart';
 import 'package:shopease/utils/helper_functions.dart';
@@ -63,8 +65,10 @@ class HomePage extends StatelessWidget {
               10.verticalSpace,
               // -- CAROUSEL SLIDER
               SizedBox(
-                height: 180.h,
+                height: 170.h,
                 child: Swiper(
+                  
+                  curve:Curves.easeIn ,
                   itemCount: 3,
                   itemBuilder: (context, index) {
                     print("build");
@@ -90,7 +94,10 @@ class HomePage extends StatelessWidget {
                   TitleText(text: "All Categories",),
                   CustomTextButton(
                     text: "see more",
-                    onTap: () {},
+                    onTap: () {
+                      gotoPage(CategoriesPage(), context , transition: PageTransitionType.rightToLeft);
+
+                    },
                   )
                 ],
               ),
@@ -145,7 +152,7 @@ class HomePage extends StatelessWidget {
                           final Set<String> favoriteIds = Set.from(favSnapshot.data!.map((product) => product.id));
                           return GridView.builder(
                             physics: NeverScrollableScrollPhysics(),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.65.h),
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.55.h),
                             itemCount: snapshot.data!.length,
                             shrinkWrap:true, // Add this line to enable scrolling within the GridView
                             itemBuilder: (context, index) {

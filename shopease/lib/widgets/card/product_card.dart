@@ -42,7 +42,7 @@ class ProductCard extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              flex: 3,
+              flex: 7,
               child: Padding(
                 padding: const EdgeInsets.only(top:5.0,  left: 5,  right: 5).r,
                 child: Hero(
@@ -71,7 +71,7 @@ class ProductCard extends StatelessWidget {
                         onPressed: addToFav,
                         icon: Icon(
                           isFav? FluentIcons.heart_16_filled: FluentIcons.heart_16_regular, 
-                          color: Colors.red,
+                          color: AppColors.secondaryColor,
                         ),
                       )
                     ],
@@ -80,12 +80,12 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 1,
+              flex: 3,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8).r,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
                         width: double.infinity,

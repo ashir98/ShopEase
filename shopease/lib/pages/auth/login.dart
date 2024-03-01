@@ -36,6 +36,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     emailContoller.text  = "ashir07aptech@gmail.com";
+     passwordController.text ="00000000";
     return Scaffold(
       body: SafeArea(
         child: Padding(

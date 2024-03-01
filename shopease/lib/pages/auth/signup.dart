@@ -1,6 +1,7 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:shopease/constants/images.dart';
 import 'package:shopease/constants/padding_sizes.dart';
@@ -215,7 +216,7 @@ class SignUpPage extends StatelessWidget {
                       .then((value) {
                         value.setLoading(false);
                         
-                        gotoPage( LoginPage(), context);
+                        gotoPage( LoginPage(), context, );
                         
 
                       }).catchError((error) {

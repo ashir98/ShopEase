@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopease/firebase/auth_service/auth_state.dart';
+import 'package:shopease/pages/navigation.dart';
 import 'package:shopease/pages/welcome/splash.dart';
+import 'package:shopease/pages/welcome/welcome.dart';
 import 'package:shopease/provider/app_provider.dart';
 import 'package:shopease/themes/light_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // Import flutter_screenutil
@@ -39,11 +43,20 @@ class ShopEase extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       // Use builder only if you need to use library outside ScreenUtilInit context
-      builder: (_ , child) {
+      builder: (context , child) {
         return  MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'ShopEase',
-        home: SplashScreen(),
+        home: StreamBuilder(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return SplashScreen(page: ScreenNavigation());
+                  } else {
+                    return SplashScreen(page: WelcomePage());
+                  }
+                },
+              ),
         theme: lightTheme,
       );
       },

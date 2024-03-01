@@ -9,7 +9,10 @@ import 'package:shopease/pages/welcome/welcome.dart';
 import 'package:shopease/utils/helper_functions.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+
+  Widget page;
+
+  SplashScreen({super.key, required this.page});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -18,12 +21,16 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
 
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Timer(Duration(seconds: 2), () { removeAndGotoPage( AuthState() , context); });
-  }
+@override
+void initState() {
+  super.initState();
+  Timer(Duration(seconds: 3), () {
+    if (mounted) {
+      removeAndGotoPage(widget.page, context);
+    }
+  });
+}
+
 
 
   @override

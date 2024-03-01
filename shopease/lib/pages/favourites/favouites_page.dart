@@ -20,7 +20,7 @@ class FavouritePage extends StatelessWidget {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text("Profile"),
+        title: Text("My Wishlist"),
       ),
 
 

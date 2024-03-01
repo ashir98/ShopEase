@@ -3,6 +3,8 @@ class AppImages{
   static String appLogoHorizontal = "assets/images/logo_horiz.png";
   static String welcome = "assets/images/welcome.png";
 
+  static String carouselBg = "assets/images/carousel_bg.png"; 
+
   static String facebook = "assets/images/facebook.png";
 
   static String google = "assets/images/google.png";

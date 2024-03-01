@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shopease/pages/navigation.dart';
+import 'package:shopease/pages/welcome/splash.dart';
 import 'package:shopease/pages/welcome/welcome.dart';
 
 class AuthState extends StatelessWidget {
@@ -12,10 +13,10 @@ class AuthState extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return ScreenNavigation();
+          return SplashScreen(page: ScreenNavigation());
         } else {
 
-          return WelcomePage();
+          return SplashScreen(page: WelcomePage());
           
         }
       },

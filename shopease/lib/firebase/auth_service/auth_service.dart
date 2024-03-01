@@ -1,7 +1,12 @@
 
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:shopease/firebase/auth_service/auth_state.dart';
+import 'package:shopease/main.dart';
 import 'package:shopease/pages/navigation.dart';
 import 'package:shopease/utils/helper_functions.dart';
 
@@ -48,15 +53,6 @@ class AuthService{
 
 
 
-
-
-
-
-
-
-
-
-
   // -- USER SIGN IN
   Future signIn(String email, password, BuildContext context )async{
    try {
@@ -81,6 +77,41 @@ class AuthService{
     } catch (error) {
       displayMessage(error.toString(), context);
     }
+
+  }
+
+
+
+
+
+  // -- GOOGLE SIGN IN
+  Future signInWithGoogle()async{
+
+   
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  // -- SIGN OUT
+   Future signout(BuildContext context)async{
+    await _auth
+    .signOut()
+    .then((value){
+
+      removeAllAndGotoPage(ShopEase(), context);
+
+
+    });
   }
 
 }

@@ -1,16 +1,121 @@
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/colors.dart';
 import 'package:shopease/constants/padding_sizes.dart';
+import 'package:shopease/firebase/auth_service/auth_service.dart';
+import 'package:shopease/main.dart';
+import 'package:shopease/pages/auth/signup.dart';
 import 'package:shopease/pages/favourites/favouites_page.dart';
 import 'package:shopease/utils/helper_functions.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  ProfilePage({super.key});
+
+  AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
+
+
+    
+
+
+
+List<ProfileTileModel> profileOptions = [
+  ProfileTileModel(
+    title: "My Account", 
+    icon: FluentIcons.person_16_regular,
+    onTap: () {
+      
+    },
+  ),
+  ProfileTileModel(
+    title: "My Order", 
+    icon: FluentIcons.shopping_bag_16_regular,
+    onTap: () {
+      
+    },
+  ),
+  ProfileTileModel(
+    title: "My Address", 
+    icon: FluentIcons.location_16_regular,
+    onTap: () {
+      
+    },
+  ),
+
+  ProfileTileModel(
+    title: "Payment Method", 
+    icon: FluentIcons.payment_16_regular,
+    onTap: () {
+      
+    },
+  ),
+  ProfileTileModel(
+    title: "My Wishlist", 
+    icon: FluentIcons.heart_16_regular,
+    onTap: () {
+      gotoPage(FavouritePage(), context);
+    },
+  ),
+  ProfileTileModel(
+    title: "Account Settings", 
+    icon: FluentIcons.settings_16_regular,
+    onTap: () {
+      
+    },
+  ),
+  ProfileTileModel(
+    title: "Logout", 
+    icon: FluentIcons.sign_out_20_regular,
+    onTap: () {
+
+
+      showDialog(
+                        context: context, 
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Sign out"),
+                            content: Text("Are you sure you want to sgn out?"),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('No'),
+                              ),
+                              TextButton(
+                                onPressed: (){
+
+                                  _authService.signout(context);
+                                  removeAllAndGotoPage(ShopEase(), context);
+
+                                },
+                                child: Text('Yes'),
+                              )
+                            ],
+                          );
+                        },);
+
+
+
+
+
+
+
+    },
+  ),
+
+];
+
+
+
+
+
+
+
     return Scaffold(
 
       appBar: AppBar(
@@ -66,9 +171,7 @@ class ProfilePage extends StatelessWidget {
                 itemCount: profileOptions.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    onTap: (){
-                      gotoPage( profileOptions[index].page, context);
-                    },
+                    onTap: profileOptions[index].onTap,
                     leading: Icon(profileOptions[index].icon),
                     title: Text( profileOptions[index].title ),
                     trailing: Icon(Icons.arrow_forward_ios_rounded),
@@ -103,63 +206,15 @@ class ProfilePage extends StatelessWidget {
 class ProfileTileModel{
   IconData icon;
   String title;
-  dynamic page;
+  VoidCallback onTap;
 
   ProfileTileModel({
     required this.title,
     required this.icon,
-    required this.page
-
+    required this.onTap
   });
 
 
   
 }
 
-
-
-
-
-List<ProfileTileModel> profileOptions = [
-  ProfileTileModel(
-    title: "My Account", 
-    icon: FluentIcons.person_16_regular,
-    page: FavouritePage()
-  ),
-  ProfileTileModel(
-    title: "My Order", 
-    icon: FluentIcons.shopping_bag_16_regular,
-    page: FavouritePage()
-  ),
-  ProfileTileModel(
-    title: "My Address", 
-    icon: FluentIcons.location_16_regular,
-    page: FavouritePage()
-  ),
-  ProfileTileModel(
-    title: "My Account", 
-    icon: FluentIcons.person_16_regular,
-    page: FavouritePage()
-  ),
-  ProfileTileModel(
-    title: "Payment Method", 
-    icon: FluentIcons.payment_16_regular,
-    page: FavouritePage()
-  ),
-  ProfileTileModel(
-    title: "My Wishlist", 
-    icon: FluentIcons.heart_16_regular,
-    page: FavouritePage()
-  ),
-  ProfileTileModel(
-    title: "Account Settings", 
-    icon: FluentIcons.settings_16_regular,
-    page: FavouritePage()
-  ),
-  ProfileTileModel(
-    title: "Logout", 
-    icon: FluentIcons.sign_out_20_regular,
-    page: FavouritePage()
-  ),
-
-];
