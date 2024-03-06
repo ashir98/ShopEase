@@ -61,9 +61,13 @@ class AuthService{
     );
 
     UserCredential userCredential = await _auth.signInWithCredential(credential);
+    User user = userCredential.user!;
 
 
-    if (userCredential!=null) {
+     DocumentSnapshot userDoc = await _db.collection('users').doc(user!.uid).get();
+
+
+     if(!userDoc.exists){
       var user = userCredential.user;
 
       var userData ={
@@ -74,18 +78,19 @@ class AuthService{
         'favourite' : []
       };
 
-
-
       await  _db
       .collection('users')
       .doc(user.uid)
       .set(userData);
 
-      removeAllAndGotoPage(ScreenNavigation(), context);
+     }
+
+     removeAllAndGotoPage(ScreenNavigation(), context);
+
+
+
       
-    }
-      
-    }
+   }
 
 
 
