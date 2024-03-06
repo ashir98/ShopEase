@@ -3,31 +3,40 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/images.dart';
 import 'package:shopease/utils/helper_functions.dart';
 
-class SocialButton extends StatelessWidget {
-  String socialIcon;
+class GoogleButton extends StatelessWidget {
   VoidCallback onTap;
 
-  SocialButton({
+  GoogleButton({
     required this.onTap,
-    required this.socialIcon
   });
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: onTap,
-      style: IconButton.styleFrom(
-        
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colors.grey),
-          borderRadius: BorderRadius.circular(50)
-        )
-      ),
-      icon: Image(
-        image: AssetImage(socialIcon),
-        width: 30.w,
-        height: 30.h,
+    return SizedBox(
+      height: 40.h,
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: onTap,
 
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10)
+          )
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(
+                image: AssetImage(AppImages.google),
+                width: 30.w,
+                height: 30.h,
+              ),
+
+              SizedBox(width: 10,),
+
+              Text("Sign in with Google")
+          ],
+        ),
       ),
     );
   }

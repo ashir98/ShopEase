@@ -5,17 +5,102 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:shopease/firebase/auth_service/auth_state.dart';
 import 'package:shopease/main.dart';
 import 'package:shopease/pages/navigation.dart';
 import 'package:shopease/utils/helper_functions.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class AuthService{
 
 
   // -- FIRBBASE  INSTANCES
   FirebaseAuth _auth = FirebaseAuth.instance;
+  GoogleSignIn _google = GoogleSignIn();
   FirebaseFirestore _db = FirebaseFirestore.instance;
+
+
+
+  Future googleSignIn(BuildContext context)async{ 
+
+
+
+    // TRIGGER THE GOOGLE AUTH FLOW
+    GoogleSignInAccount? googleAccount = await _google.signIn();
+
+    if (googleAccount != null) {
+
+      
+    // -- OBTAIN THE GOOGLE AUTH DETAILS
+    GoogleSignInAuthentication googleAuth = await googleAccount!.authentication;
+
+    // -- CREATE A CREDENTIAL
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken
+    );
+
+    UserCredential userCredential = await _auth.signInWithCredential(credential);
+
+
+    if (userCredential!=null) {
+      var user = userCredential.user;
+
+      var userData ={
+        'id': user!.uid,
+        'email': user.email,
+        'name':user.displayName,
+        'phone' :user.phoneNumber,
+        'favourite' : []
+      };
+
+
+
+      await  _db
+      .collection('users')
+      .doc(user.uid)
+      .set(userData);
+
+      removeAllAndGotoPage(ScreenNavigation(), context);
+      
+    }
+      
+    }
+
+
+
+
+
+
+
+  }
+
+
+
+
+
+
+
 
   // -- USER SIGN UP
   Future signup(String firstName, lastName, phone,email, password,  BuildContext context)async{
@@ -84,18 +169,6 @@ class AuthService{
 
 
 
-  // -- GOOGLE SIGN IN
-  Future signInWithGoogle()async{
-
-   
-
-  }
-
-
-
-
-
-
 
 
 
@@ -104,6 +177,7 @@ class AuthService{
 
   // -- SIGN OUT
    Future signout(BuildContext context)async{
+    await _google.signOut();
     await _auth
     .signOut()
     .then((value){

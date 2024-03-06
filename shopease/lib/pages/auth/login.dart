@@ -89,7 +89,7 @@ class LoginPage extends StatelessWidget {
                             return "Please enter your email";
                           }else if(!value.contains("@")  || !value.contains(".com")  ){
                             return "Enter a valid email address";
-
+    
                           }
                         },
                       ),
@@ -114,7 +114,7 @@ class LoginPage extends StatelessWidget {
                             return "Please enter your Password";
                           }else if(value.length < 6 ){
                             return "Password should be atleast 6 character long";
-
+    
                           }
                           },
                         ),
@@ -190,23 +190,15 @@ class LoginPage extends StatelessWidget {
                 
             
                 // -- GOOGLE BUTTON
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SocialButton(
-                      onTap: () {
-                        
-                      },
-                      socialIcon: AppImages.google,
-                    ),
-                    SizedBox(width:10,),
-                    SocialButton(
-                      onTap: () {
-                        
-                      },
-                      socialIcon: AppImages.apple,
-                    )
-                  ],
+                GoogleButton(
+                  onTap: () {
+                    _authService
+                    .googleSignIn(context);
+                   
+                
+                                   
+                    
+                  },
                 ),
                 SizedBox(
                   height: getScreenHeight(context) *0.04,

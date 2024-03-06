@@ -2,12 +2,13 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:shopease/constants/colors.dart';
 import 'package:shopease/constants/padding_sizes.dart';
 import 'package:shopease/firebase/auth_service/auth_service.dart';
 import 'package:shopease/main.dart';
 import 'package:shopease/pages/auth/signup.dart';
-import 'package:shopease/pages/favourites/favouites_page.dart';
+import 'package:shopease/pages/wishlist/wishlist_page.dart';
 import 'package:shopease/utils/helper_functions.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -57,7 +58,7 @@ List<ProfileTileModel> profileOptions = [
     title: "My Wishlist", 
     icon: FluentIcons.heart_16_regular,
     onTap: () {
-      gotoPage(FavouritePage(), context);
+      gotoPage(WishListPage(), context);
     },
   ),
   ProfileTileModel(
@@ -86,15 +87,18 @@ List<ProfileTileModel> profileOptions = [
                                 },
                                 child: Text('No'),
                               ),
-                              TextButton(
-                                onPressed: (){
-
-                                  _authService.signout(context);
-                                  removeAllAndGotoPage(ShopEase(), context);
-
-                                },
-                                child: Text('Yes'),
-                              )
+                              
+                                TextButton(
+                                  onPressed: (){
+                                    _authService.signout(context).then((value) {
+                                      removeAllAndGotoPage(ShopEase(), context);
+                                    });
+                                
+                                
+                                  },
+                                  child: Text('Yes'),
+                                ),
+                              
                             ],
                           );
                         },);

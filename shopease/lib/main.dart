@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopease/firebase/auth_service/auth_state.dart';
 import 'package:shopease/pages/navigation.dart';
 import 'package:shopease/pages/welcome/splash.dart';
 import 'package:shopease/pages/welcome/welcome.dart';
@@ -10,6 +9,7 @@ import 'package:shopease/themes/light_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // Import flutter_screenutil
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase/firebase_options.dart';
+
 
 
 void main() async{

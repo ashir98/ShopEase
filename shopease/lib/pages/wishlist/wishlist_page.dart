@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:shopease/constants/colors.dart';
+import 'package:shopease/constants/lottie.dart';
 import 'package:shopease/constants/padding_sizes.dart';
 import 'package:shopease/firebase/firestore/firestore_service.dart';
 import 'package:shopease/models/product_model.dart';
@@ -8,9 +10,10 @@ import 'package:shopease/pages/product_detail/product_detail.dart';
 import 'package:shopease/provider/app_provider.dart';
 import 'package:shopease/utils/helper_functions.dart';
 import 'package:shopease/widgets/card/product_card.dart';
+import 'package:lottie/lottie.dart';
 
-class FavouritePage extends StatelessWidget {
-  FavouritePage({super.key});
+class WishListPage extends StatelessWidget {
+  WishListPage({super.key});
 
 
   FireStoreService _fireStoreService = FireStoreService();
@@ -33,7 +36,9 @@ class FavouritePage extends StatelessWidget {
                     return Center(child: CircularProgressIndicator(),);
                   } else {
         
-                    return GridView.builder(
+                    if (!snapshot.data!.isEmpty) {
+
+                      return GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.65.h),
                         itemCount: snapshot.data!.length,
                         shrinkWrap:true, // Add this line to enable scrolling within the GridView
@@ -47,7 +52,6 @@ class FavouritePage extends StatelessWidget {
                           var status = snapshot.data![index].status;
         
         
-                          print(snapshot.data!.length.toString());
         
         
                           return Consumer<AppChangeNotifier>(
@@ -85,6 +89,22 @@ class FavouritePage extends StatelessWidget {
                           );
                         },
                       );
+                      
+                    } else {
+                      return Column(
+                        children: [
+                          Column(
+                            children: [
+                              Lottie.asset(AppLottie.emptyWishlist, width: double.infinity, height:  300.h),
+                              Text("Empty Wishlist",style: TextStyle(fontSize: 20.sp, color: AppColors.primaryColor),),
+                            ],
+                          ),
+
+                          
+                        ],
+                      );
+                      
+                    }
                     
                   }
                 },

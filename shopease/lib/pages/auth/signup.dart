@@ -33,6 +33,18 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    firstNameContoller.text= "Syed";
+    lastNameController.text = "Ashir";
+    emailController.text = "ashir07aptech@gmail.com";
+    phoneContoller.text="03353226549";
+    passwordController.text= "00000000";
+    confirmPasswordContoller.text= "00000000";
+
+
+
+
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
