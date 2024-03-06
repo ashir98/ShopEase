@@ -8,7 +8,7 @@ import 'package:shopease/pages/navigation.dart';
 import 'package:shopease/provider/app_provider.dart';
 import 'package:shopease/utils/helper_functions.dart';
 import 'package:shopease/widgets/buttons/custom_button.dart';
-import 'package:shopease/widgets/buttons/social_button.dart';
+import 'package:shopease/widgets/buttons/google_button.dart';
 import 'package:shopease/widgets/text/subtitle.dart';
 import 'package:shopease/widgets/text/heading.dart';
 import 'package:shopease/widgets/textfield/custom_pw_field.dart';
@@ -190,15 +190,28 @@ class LoginPage extends StatelessWidget {
                 
             
                 // -- GOOGLE BUTTON
-                GoogleButton(
-                  onTap: () {
-                    _authService
-                    .googleSignIn(context);
-                   
-                
-                                   
+                Consumer<AppChangeNotifier>(
+                  builder: (context, provalue, child) =>  GoogleButton(
+
+                    isLoading: provalue.isGLoading,
                     
-                  },
+                    onTap: () {
+                      provalue.setGLoading(true);
+                      _authService
+                      .googleSignIn(context)
+                      .then((value){
+                        provalue.setGLoading(false);
+                      })
+                      .catchError((error){
+                        provalue.setGLoading(false);
+
+                      });
+                     
+                  
+                                     
+                      
+                    },
+                  ),
                 ),
                 SizedBox(
                   height: getScreenHeight(context) *0.04,

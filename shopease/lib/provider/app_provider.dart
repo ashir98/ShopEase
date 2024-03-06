@@ -26,6 +26,14 @@ class AppChangeNotifier extends ChangeNotifier{
   }
 
 
+  bool _isGLoading = false;
+  bool get isGLoading => _isGLoading;
+  setGLoading(bool value){
+    _isGLoading = value;
+    notifyListeners();
+  }
+
+
 
 
 

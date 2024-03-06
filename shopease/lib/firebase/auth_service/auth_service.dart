@@ -85,6 +85,8 @@ class AuthService{
 
      }
 
+     displayMessage( "Logged in as ${user.email}" ,  context);
+
      removeAllAndGotoPage(ScreenNavigation(), context);
 
 
