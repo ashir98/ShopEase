@@ -39,7 +39,7 @@ class WishListPage extends StatelessWidget {
                     if (!snapshot.data!.isEmpty) {
 
                       return GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.65.h),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.55.h),
                         itemCount: snapshot.data!.length,
                         shrinkWrap:true, // Add this line to enable scrolling within the GridView
                         itemBuilder: (context, index) {
@@ -96,7 +96,8 @@ class WishListPage extends StatelessWidget {
                           Column(
                             children: [
                               Lottie.asset(AppLottie.emptyWishlist, width: double.infinity, height:  300.h),
-                              Text("Empty Wishlist",style: TextStyle(fontSize: 20.sp, color: AppColors.primaryColor),),
+                              15.verticalSpace,
+                              Text("Empty Wishlist",style: TextStyle(fontSize: 20.sp, color: AppColors.primaryColor, fontWeight: FontWeight.w500),),
                             ],
                           ),
 

@@ -52,7 +52,7 @@ class AuthService{
 
       
     // -- OBTAIN THE GOOGLE AUTH DETAILS
-    GoogleSignInAuthentication googleAuth = await googleAccount!.authentication;
+    GoogleSignInAuthentication googleAuth = await googleAccount.authentication;
 
     // -- CREATE A CREDENTIAL
     final credential = GoogleAuthProvider.credential(

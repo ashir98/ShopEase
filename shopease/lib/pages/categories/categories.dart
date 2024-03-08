@@ -3,6 +3,8 @@ import 'package:shopease/constants/images.dart';
 import 'package:shopease/constants/padding_sizes.dart';
 import 'package:shopease/firebase/firestore/firestore_service.dart';
 import 'package:shopease/models/category_model.dart';
+import 'package:shopease/pages/categories/category_view.dart';
+import 'package:shopease/utils/helper_functions.dart';
 import 'package:shopease/widgets/card/category_card.dart';
 
 
@@ -34,7 +36,7 @@ class CategoriesPage extends StatelessWidget {
                   name: snapshot.data![index].name,
                   description: snapshot.data![index].description,
                   onTap: () {
-                    
+                    gotoPage(CategoryView(catId: snapshot.data![index].id, catName: snapshot.data![index].name,), context);
                   },
                 );
               },

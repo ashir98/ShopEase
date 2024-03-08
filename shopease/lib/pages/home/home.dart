@@ -10,6 +10,7 @@ import 'package:shopease/firebase/firestore/firestore_service.dart';
 import 'package:shopease/models/category_model.dart';
 import 'package:shopease/models/product_model.dart';
 import 'package:shopease/pages/categories/categories.dart';
+import 'package:shopease/pages/categories/category_view.dart';
 import 'package:shopease/pages/product_detail/product_detail.dart';
 import 'package:shopease/provider/app_provider.dart';
 import 'package:shopease/utils/helper_functions.dart';
@@ -115,7 +116,9 @@ class HomePage extends StatelessWidget {
                         return CategoryButton(
                           icon: snapshot.data![index].icon,
                           name: snapshot.data![index].name,
-                          onTap: () {},
+                          onTap: () {
+                            gotoPage(CategoryView(catId: snapshot.data![index].id, catName: snapshot.data![index].name,), context);
+                          },
                         );
                       },
                     );

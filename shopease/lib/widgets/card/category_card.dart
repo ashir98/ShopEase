@@ -23,39 +23,42 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 135.h,
-      child: Card(
-        elevation: 0,
-        surfaceTintColor: Colors.white,
-        color: Color(0xfff3f3f3),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5).r,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              
-              // -- EXPANDED
-              Expanded(
-                child: FadeInImage.memoryNetwork(
-                  placeholder: kTransparentImage, 
-                  image: imageUrl
-                )
-              ),
-                  
-                  
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TitleText(text: name),
-                    SubtitleText(text: description, fontSize: 14.sp)
-                    
-                  ],
+    return GestureDetector(
+      onTap: onTap,
+      child: SizedBox(
+        height: 135.h,
+        child: Card(
+          elevation: 0,
+          surfaceTintColor: Colors.white,
+          color: Color(0xfff3f3f3),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5).r,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                
+                // -- EXPANDED
+                Expanded(
+                  child: FadeInImage.memoryNetwork(
+                    placeholder: kTransparentImage, 
+                    image: imageUrl
+                  )
                 ),
-              )
-            ],
+                    
+                    
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TitleText(text: name),
+                      SubtitleText(text: description, fontSize: 14.sp)
+                      
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

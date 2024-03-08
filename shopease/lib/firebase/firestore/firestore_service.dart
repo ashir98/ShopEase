@@ -31,6 +31,35 @@ class FireStoreService {
     });
   }
 
+
+
+
+
+  // -- GET PRODUCTS CATEOGRY VISE
+  Stream<List<ProductModel>> getProductsCategory(String categoryId){
+    return _firestore
+    .collection("categories")
+    .doc(categoryId)
+    .collection("products")
+    .snapshots()
+    .map((snapshot){
+      return snapshot.docs.map((doc){
+        return ProductModel.fromJson(doc.data());
+      }).toList();
+
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
   // -- GET PRODUCTS
   Stream<List<ProductModel>> getPopularProducts() {
     return _firestore
