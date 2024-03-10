@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shopease/models/category_model.dart';
 import 'package:shopease/models/product_model.dart';
+import 'package:shopease/models/user_model.dart';
 import 'package:shopease/utils/helper_functions.dart';
 
 class FireStoreService {
@@ -11,6 +12,10 @@ class FireStoreService {
 
   final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
+
+
+
+  /////////////////////////////////////////////// CATEGORIES & PRODUCTS///////////////////////////////////////    
 
   // -- GET CATEGORIES
   Stream<List<CategoryModel>> getCategories() {
@@ -140,6 +145,57 @@ class FireStoreService {
       return favoriteProducts;
     });
   }
+
+
+
+
+
+
+
+
+
+
+
+
+  ///////////////////////////////////////////  USER INFORMATION //////////////////////////////////////////////
+
+
+  Stream<UserModel> getUserInfo(){
+
+    return  _firestore
+    .collection('users')
+    .doc(_auth.currentUser!.uid)
+    .snapshots()
+    .map((snapshot){
+
+      return UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
+
+
+    });
+    
+  }  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
