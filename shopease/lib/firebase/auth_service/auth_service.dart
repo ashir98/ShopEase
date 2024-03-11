@@ -70,10 +70,19 @@ class AuthService{
      if(!userDoc.exists){
       var user = userCredential.user;
 
+      var name = user!.displayName;
+      List<String> nameParts = name!.split(' '); // Splitting the full name by space
+
+      // Assuming that the first part is the first name and the rest is the last name
+      var firstName = nameParts[0];
+      var lastName = nameParts.sublist(1).join(' ');
+
+
       var userData ={
         'id': user!.uid,
         'email': user.email,
-        'name':user.displayName,
+        'firstName': firstName,
+        'lastName': lastName ,
         'phone' :user.phoneNumber,
         'favourite' : []
       };
@@ -185,14 +194,8 @@ class AuthService{
   // -- SIGN OUT
    Future signout(BuildContext context)async{
     await _google.signOut();
-    await _auth
-    .signOut()
-    .then((value){
+    await _auth.signOut();
 
-      removeAllAndGotoPage(ShopEase(), context);
-
-
-    });
   }
 
 }

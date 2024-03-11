@@ -10,6 +10,7 @@ import 'package:shopease/firebase/firestore/firestore_service.dart';
 import 'package:shopease/main.dart';
 import 'package:shopease/models/user_model.dart';
 import 'package:shopease/pages/auth/signup.dart';
+import 'package:shopease/pages/profile/edit_profile.dart';
 import 'package:shopease/pages/wishlist/wishlist_page.dart';
 import 'package:shopease/utils/helper_functions.dart';
 
@@ -28,6 +29,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
+
     
 
 
@@ -37,6 +39,8 @@ List<ProfileTileModel> profileOptions = [
     title: "My Account", 
     icon: FluentIcons.person_16_regular,
     onTap: () {
+
+      gotoPage(MyAccount(), context);
       
     },
   ),
@@ -80,36 +84,33 @@ List<ProfileTileModel> profileOptions = [
     title: "Logout", 
     icon: FluentIcons.sign_out_20_regular,
     onTap: () {
-
-
+      
       showDialog(
-                        context: context, 
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text("Sign out"),
-                            content: Text("Are you sure you want to sgn out?"),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text('No'),
-                              ),
-                              
-                                TextButton(
-                                  onPressed: (){
-                                    _authService.signout(context).then((value) {
-                                      removeAllAndGotoPage(ShopEase(), context);
-                                    });
-                                
-                                
-                                  },
-                                  child: Text('Yes'),
-                                ),
-                              
-                            ],
-                          );
-                        },);
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("Sign out"),
+                content: Text("are you sure you want to sign out?"),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("No"),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      _authService.signout(context).then((value) {
+                        removeAllAndGotoPage(ShopEase(), context);
+                      });
+                    },
+                    child: Text("Yes"),
+                  )
+                ],
+              );
+            },
+          );
 
 
 
@@ -145,7 +146,7 @@ List<ProfileTileModel> profileOptions = [
             );
             
           } else {
-
+            var name = snapshot.data!.name;
             var firstName = snapshot.data!.firstName;
             var lastName = snapshot.data!.lastName;
             var email = snapshot.data!.email;
@@ -155,6 +156,7 @@ List<ProfileTileModel> profileOptions = [
             return Padding(
             padding: defaultPadding,
             child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Column(
               
                 children: [
@@ -184,7 +186,7 @@ List<ProfileTileModel> profileOptions = [
               
                       // -- NAME
                       Text(
-                        " $firstName $lastName ",
+                        firstName.isEmpty && lastName.isEmpty? "$name" : " $firstName $lastName ",
                         style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
                       )
                     ],
@@ -196,6 +198,7 @@ List<ProfileTileModel> profileOptions = [
               
                   // -- PROFILE TILES
                   ListView.separated(
+
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: profileOptions.length,

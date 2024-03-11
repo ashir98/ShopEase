@@ -7,6 +7,7 @@ class CustomTextField extends StatelessWidget {
   TextEditingController? controller;
   String? hintText;
   IconData? prefixIcon;
+  TextInputType? keyboardType;
   GlobalKey<FormState>? formkey;
   String? Function(String? value)? validator;
   
@@ -20,6 +21,7 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.formkey,
     this.validator,
+    this.keyboardType = TextInputType.text
 
   });
 
@@ -27,6 +29,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return TextFormField(
+      keyboardType: keyboardType,
       controller: controller,
       autofocus: false,
       decoration: InputDecoration(

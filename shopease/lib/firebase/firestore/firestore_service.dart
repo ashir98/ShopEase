@@ -174,6 +174,28 @@ class FireStoreService {
     });
     
   }  
+
+
+
+
+
+
+
+  Future updateUserInfo(String firstName, lastName, phone)async{
+
+    _firestore
+    .collection('users')
+    .doc(_auth.currentUser!.uid)
+    .update({
+
+      'firstName' :firstName,
+      'lastName' : lastName,
+      'phone' : phone
+
+    });
+
+
+  }
   
 
 
