@@ -65,29 +65,14 @@ class CartItemWidget extends StatelessWidget {
                       children: [
                 
                         Text("\$100", style: TextStyle(color: AppColors.primaryColor, fontSize: 18.sp, fontWeight: FontWeight.w600),),
-                        Row(
-                          children: [
-                
-                            IconButton(
-                              onPressed: () {
-                                
-                              },
-                              color: AppColors.primaryColor,
-                              
-                              icon: Icon(FluentIcons.subtract_square_24_filled, size: 25.sp,),
-                            ),
-                            Text("1", style: TextStyle(color: AppColors.primaryColor, fontSize: 16.sp),),
-                
-                            IconButton(
-                              onPressed: () {
-                                
-                              },
-                              color: AppColors.primaryColor,
-                              icon: Icon(FluentIcons.add_square_24_filled, size:25.sp,),
-                            ),
-                
-                
-                          ],
+                        QuantityCounter(
+                          qty: 1,
+                          increment: () {
+                            
+                          },
+                          decrement: () {
+                            
+                          },
                         )
                 
                       ],
@@ -104,6 +89,41 @@ class CartItemWidget extends StatelessWidget {
           ],
         )
       ),
+    );
+  }
+}
+
+class QuantityCounter extends StatelessWidget {
+  int qty;
+  VoidCallback increment;
+  VoidCallback decrement;
+
+  QuantityCounter({
+    super.key,
+    required this.qty,
+    required this.increment,
+    required this.decrement
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+                    
+        IconButton(
+          onPressed: decrement,
+          color: AppColors.primaryColor,
+          
+          icon: Icon(FluentIcons.subtract_square_24_filled, size: 25.sp,),
+        ),
+        Text(qty.toString(), style: TextStyle(color: AppColors.primaryColor, fontSize: 16.sp),),
+                    
+        IconButton(
+          onPressed: increment,
+          color: AppColors.primaryColor,
+          icon: Icon(FluentIcons.add_square_24_filled, size:25.sp,),
+        ), 
+      ],
     );
   }
 }

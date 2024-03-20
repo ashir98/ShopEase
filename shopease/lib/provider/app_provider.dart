@@ -33,10 +33,6 @@ class AppChangeNotifier extends ChangeNotifier{
     notifyListeners();
   }
 
-
-
-
-
   
 
 Set<String> _favourites = {}; // Store product IDs in a set for efficient membership testing
