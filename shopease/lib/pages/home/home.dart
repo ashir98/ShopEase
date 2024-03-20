@@ -73,8 +73,46 @@ class HomePage extends StatelessWidget {
                   curve:Curves.easeIn ,
                   itemCount: 3,
                   itemBuilder: (context, index) {
-                    print("build");
-                    return CarouselCard();
+
+                    
+
+
+                    return StreamBuilder<List<ProductModel>>(
+                      stream: _fireStoreService.getPopularProducts(),
+                      builder: (context, snapshot) {
+
+                         ProductModel product = ProductModel(
+                                id: snapshot.data![index].id, 
+                                name: snapshot.data![index].name, 
+                                imageUrl: snapshot.data![index].imageUrl, 
+                                description: snapshot.data![index].description, 
+                                status: snapshot.data![index].status, 
+                                price: snapshot.data![index].price, 
+                                rating: snapshot.data![index].rating
+                              );
+
+
+                       if (!snapshot.hasData) {
+                         return Center(child: CircularProgressIndicator(),);
+                       } else {
+
+                         return CarouselCard(
+                          image: snapshot.data![index].imageUrl,
+                          
+                          onTap: () {
+                            gotoPage(
+                              ProductDetailPage(
+                               product: product,
+                              ), 
+                              context
+                            );
+                          },
+                        
+                        );
+                         
+                       }
+                      }
+                    );
                   },
                   autoplay: true,
                   indicatorLayout: PageIndicatorLayout.COLOR,
@@ -160,7 +198,6 @@ class HomePage extends StatelessWidget {
                             itemCount: snapshot.data!.length,
                             shrinkWrap:true, // Add this line to enable scrolling within the GridView
                             itemBuilder: (context, index) {
-
                               ProductModel product = ProductModel(
                                 id: snapshot.data![index].id, 
                                 name: snapshot.data![index].name, 
@@ -170,9 +207,6 @@ class HomePage extends StatelessWidget {
                                 price: snapshot.data![index].price, 
                                 rating: snapshot.data![index].rating
                               );
-
-
-                              
 
                               // Check if the product ID exists in the favorite list
                               bool isFav = favoriteIds.contains(product.id);

@@ -6,6 +6,7 @@ class ProductModel{
   String status;
   double rating;
   int price;
+  int? qty;
 
 
   ProductModel({
@@ -16,7 +17,8 @@ class ProductModel{
     required this.description,
     required this.status,
     required this.price,
-    required this.rating
+    required this.rating,
+    this.qty
   });
 
 
@@ -28,7 +30,8 @@ class ProductModel{
       description: map['description'], 
       status: map['status'], 
       price: map['price'],
-      rating: map['rating']
+      rating: map['rating'],
+      qty: map['qty']
     );
   }
 
@@ -44,7 +47,8 @@ class ProductModel{
       'description':description,
       'status' : status,
       'price' : price,
-      'rating' : rating
+      'rating' : rating,
+      'qty':qty
     };
 
   }

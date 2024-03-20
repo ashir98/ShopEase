@@ -51,7 +51,7 @@ class WishListPage extends StatelessWidget {
                                 status: snapshot.data![index].status, 
                                 price: snapshot.data![index].price, 
                                 rating: snapshot.data![index].rating
-                          );
+                              );
         
         
         
@@ -74,6 +74,7 @@ class WishListPage extends StatelessWidget {
                                 gotoPage(
                                   ProductDetailPage(
                                     product: product,
+                            
                                   ), 
                                   context
                                 );

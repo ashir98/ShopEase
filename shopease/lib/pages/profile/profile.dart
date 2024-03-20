@@ -170,7 +170,7 @@ List<ProfileTileModel> profileOptions = [
                         children: [
                           CircleAvatar(
                             radius: 55.r,
-                            child: Text("A", style: TextStyle(fontSize: 40.sp),),
+                            child: Text( firstName[0] , style: TextStyle(fontSize: 40.sp),),
                           ),
                       
                           CircleAvatar(
