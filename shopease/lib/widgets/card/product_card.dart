@@ -4,14 +4,12 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shopease/constants/colors.dart';
+import 'package:shopease/models/product_model.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class ProductCard extends StatelessWidget {
-  String id;
-  String name;
-  String imageUrl;
-  double price;
-  double? rating;
+  ProductModel product;
+
   VoidCallback? onTap;
   bool isFav;
   VoidCallback? addToFav;
@@ -20,11 +18,7 @@ class ProductCard extends StatelessWidget {
 
   ProductCard({
     super.key,
-    required this.id,
-    required this.name,
-    required this.imageUrl,
-    required this.price,
-    this.rating = 1.1,
+    required this.product,
     this.onTap,
     required this.isFav,
     this.addToFav
@@ -46,7 +40,7 @@ class ProductCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top:5.0,  left: 5,  right: 5).r,
                 child: Hero(
-                  tag: id,
+                  tag: product.id,
                   child: Stack(
                     alignment: Alignment.topRight,
                     children: [
@@ -60,7 +54,7 @@ class ProductCard extends StatelessWidget {
                             padding: const EdgeInsets.all(20).r,
                             child: FadeInImage.memoryNetwork(
                                 placeholder: kTransparentImage,
-                                image: imageUrl,
+                                image: product.imageUrl,
                                 fadeInDuration: const Duration(milliseconds: 300),
                               ),
                           ),
@@ -90,7 +84,7 @@ class ProductCard extends StatelessWidget {
                     SizedBox(
                         width: double.infinity,
                         child: Text(
-                          name,
+                          product.name,
                           style: TextStyle(
                               fontSize: 16.sp, fontWeight: FontWeight.w400),
                           overflow: TextOverflow.ellipsis,
@@ -99,7 +93,7 @@ class ProductCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Rs.$price",
+                          "Rs.${product.price}",
                           style: TextStyle( fontSize: 16.sp, fontWeight: FontWeight.w400,color: AppColors.primaryColor),
                         ),
                         Row(
@@ -110,7 +104,7 @@ class ProductCard extends StatelessWidget {
                               size: 16.sp,
                             ),
                             Text(
-                              rating.toString(),
+                              product.rating.toString(),
                               style: TextStyle(fontSize: 14.sp),
                             )
                           ],

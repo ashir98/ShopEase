@@ -71,11 +71,8 @@ class CategoryView extends StatelessWidget {
         
                                 return Consumer<AppChangeNotifier>(
                                   builder: (context, provalue, child) => ProductCard(
-                                    id: id,
-                                    name: name,
-                                    imageUrl: imageUrl,
-                                    price: price.toDouble(),
-                                    rating: rating,
+                                    
+                                    product: product,
                                     isFav: isFav,
                                     addToFav: () {
                                       _fireStoreService.addToFavourites(id, context).then((value) {
@@ -85,11 +82,7 @@ class CategoryView extends StatelessWidget {
                                     onTap: () {
                                       gotoPage(
                                         ProductDetailPage(
-                                          id: id,
-                                          name: name,
-                                          imageUrl: imageUrl,
-                                          description: description,
-                                          rating: rating,
+                                          product: product,
                                         ),
                                         context
                                       );

@@ -2,25 +2,23 @@ import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:shopease/constants/colors.dart';
+import 'package:shopease/models/product_model.dart';
+import 'package:shopease/provider/cart_provider.dart';
+import 'package:shopease/utils/helper_functions.dart';
+import 'package:shopease/widgets/card/cart_card.dart';
+import 'package:shopease/widgets/cart/cart_checkout.dart';
 import 'package:shopease/widgets/text/heading.dart';
 import 'package:shopease/widgets/text/subtitle.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  String id;
-  String name;
-  String imageUrl;
-  double rating;
-  String description;
+  ProductModel product;
 
   ProductDetailPage(
       {super.key,
-      required this.id,
-      required this.name,
-      required this.imageUrl,
-      required this.description,
-      required this.rating
+      required this.product
     });
 
   @override
@@ -35,7 +33,7 @@ class ProductDetailPage extends StatelessWidget {
           children: [
             // -- PICTURE
             Hero(
-              tag: id,
+              tag: product.id,
               child: SizedBox(
                 height: 250.h,
                 width: double.infinity,
@@ -46,7 +44,7 @@ class ProductDetailPage extends StatelessWidget {
                       padding: const EdgeInsets.all(15).r,
                       child: FadeInImage.memoryNetwork(
                         placeholder: kTransparentImage,
-                        image: imageUrl,
+                        image: product.imageUrl,
                       ),
                     )),
               ),
@@ -65,40 +63,19 @@ class ProductDetailPage extends StatelessWidget {
                       SizedBox(
                         width: 200.w,
                         child: Text(
-                          name,
-                          style: TextStyle(
-                              fontSize: 22.sp, fontWeight: FontWeight.w600),
+                          product.name,
+                          style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w600),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
         
                       // quantity
-                      Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {},
-                            color: AppColors.primaryColor,
-                            icon: Icon(
-                              Icons.remove,
-                              size: 18.sp,
-                            ),
-                          ),
-                          Text(
-                            "1",
-                            style: TextStyle(
-                                color: AppColors.primaryColor, fontSize: 16.sp),
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            color: AppColors.primaryColor,
-                            icon: Icon(
-                              Icons.add,
-                              size: 18.sp,
-                            ),
-                          ),
-                        ],
-                      ),
+                      QuantityCounter(
+                        qty: 1, 
+                        increment: (){}, 
+                        decrement: (){}
+                      )
                     ],
                   ),
         
@@ -108,7 +85,7 @@ class ProductDetailPage extends StatelessWidget {
                     children: [
                       Icon(FluentIcons.star_24_filled, color: AppColors.secondaryColor,),
                       Text(
-                        rating.toString(),
+                        product.rating.toString(),
                         style: TextStyle(
                           fontSize: 16.sp,
                           color: Colors.black
@@ -121,13 +98,35 @@ class ProductDetailPage extends StatelessWidget {
         
                   // -- DESCRIPTION
                   HeadingText(text: "Description", fontSize: 18.sp),
-                  SubtitleText(text: description, fontSize: 14.sp)
+                  SubtitleText(text: product.description, fontSize: 14.sp)
                 ],
               ),
             )
           ],
         ),
       ),
+
+
+
+
+      bottomNavigationBar: Consumer<CartNotifier>(
+        builder: (context, value, child) =>  AddToCartBar(
+          totalPrice: product.price, 
+          onTap: () {
+            print("object");
+            value.addToCart(product);
+            displayMessage("Product added to your cart", context);
+          },
+        ),
+      ),
+
+
+
+
+
+
+
     );
+
   }
 }

@@ -73,8 +73,46 @@ class HomePage extends StatelessWidget {
                   curve:Curves.easeIn ,
                   itemCount: 3,
                   itemBuilder: (context, index) {
-                    print("build");
-                    return CarouselCard();
+
+                    
+
+
+                    return StreamBuilder<List<ProductModel>>(
+                      stream: _fireStoreService.getPopularProducts(),
+                      builder: (context, snapshot) {
+
+                         ProductModel product = ProductModel(
+                                id: snapshot.data![index].id, 
+                                name: snapshot.data![index].name, 
+                                imageUrl: snapshot.data![index].imageUrl, 
+                                description: snapshot.data![index].description, 
+                                status: snapshot.data![index].status, 
+                                price: snapshot.data![index].price, 
+                                rating: snapshot.data![index].rating
+                              );
+
+
+                       if (!snapshot.hasData) {
+                         return Center(child: CircularProgressIndicator(),);
+                       } else {
+
+                         return CarouselCard(
+                          image: snapshot.data![index].imageUrl,
+                          
+                          onTap: () {
+                            gotoPage(
+                              ProductDetailPage(
+                               product: product,
+                              ), 
+                              context
+                            );
+                          },
+                        
+                        );
+                         
+                       }
+                      }
+                    );
                   },
                   autoplay: true,
                   indicatorLayout: PageIndicatorLayout.COLOR,
@@ -160,39 +198,32 @@ class HomePage extends StatelessWidget {
                             itemCount: snapshot.data!.length,
                             shrinkWrap:true, // Add this line to enable scrolling within the GridView
                             itemBuilder: (context, index) {
-                              var product = snapshot.data![index];
-                              var id = product.id;
-                              var name = product.name;
-                              var imageUrl = product.imageUrl;
-                              var description = product.description;
-                              var price = product.price;
-                              var rating = product.rating;
-                              var status = product.status;
+                              ProductModel product = ProductModel(
+                                id: snapshot.data![index].id, 
+                                name: snapshot.data![index].name, 
+                                imageUrl: snapshot.data![index].imageUrl, 
+                                description: snapshot.data![index].description, 
+                                status: snapshot.data![index].status, 
+                                price: snapshot.data![index].price, 
+                                rating: snapshot.data![index].rating
+                              );
 
                               // Check if the product ID exists in the favorite list
-                              bool isFav = favoriteIds.contains(id);
+                              bool isFav = favoriteIds.contains(product.id);
 
                               return Consumer<AppChangeNotifier>(
                                 builder: (context, provalue, child) => ProductCard(
-                                  id: id,
-                                  name: name,
-                                  imageUrl: imageUrl,
-                                  price: price.toDouble(),
-                                  rating: rating,
+                                  product: product,
                                   isFav: isFav,
                                   addToFav: () {
-                                    _fireStoreService.addToFavourites(id, context).then((value) {
-                                      provalue.toggleFavourite(id);
+                                    _fireStoreService.addToFavourites(product.id, context).then((value) {
+                                      provalue.toggleFavourite(product.id);
                                     });
                                   },
                                   onTap: () {
                                     gotoPage(
                                       ProductDetailPage(
-                                        id: id,
-                                        name: name,
-                                        imageUrl: imageUrl,
-                                        description: description,
-                                        rating: rating,
+                                        product: product,
                                       ),
                                       context
                                     );

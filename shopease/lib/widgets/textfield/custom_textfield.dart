@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +11,7 @@ class CustomTextField extends StatelessWidget {
   IconData? prefixIcon;
   TextInputType? keyboardType;
   GlobalKey<FormState>? formkey;
+  bool? enabled;
   String? Function(String? value)? validator;
   
 
@@ -21,7 +24,8 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.formkey,
     this.validator,
-    this.keyboardType = TextInputType.text
+    this.keyboardType = TextInputType.text,
+    this.enabled = true
 
   });
 
@@ -29,6 +33,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return TextFormField(
+      enabled: enabled,
       keyboardType: keyboardType,
       controller: controller,
       autofocus: false,

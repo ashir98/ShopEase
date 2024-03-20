@@ -23,15 +23,10 @@ class FireStoreService {
         .collection('categories')
         .orderBy('name', descending: true)
         .snapshots()
+        
         .map((snapshot) {
       return snapshot.docs.map((doc) {
-        return CategoryModel.fromJson({
-          'id': doc['id'],
-          'name': doc['name'],
-          'imageUrl': doc['imageUrl'],
-          'description': doc['description'],
-          'icon': doc['icon']
-        });
+        return CategoryModel.fromJson( doc.data() );
       }).toList();
     });
   }

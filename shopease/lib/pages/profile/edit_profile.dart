@@ -26,6 +26,7 @@ class MyAccount extends StatelessWidget {
   
 
   // -- CONTROLLERS
+  TextEditingController emailContoller = TextEditingController();
   TextEditingController firstNameContoller = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneContoller = TextEditingController();
@@ -56,7 +57,7 @@ class MyAccount extends StatelessWidget {
 
 
           }else{
-
+            emailContoller.text = snapshot.data!.email;
             firstNameContoller.text = snapshot.data!.firstName;
             lastNameController.text = snapshot.data!.lastName;
             phoneContoller.text = snapshot.data!.phone;
@@ -74,6 +75,28 @@ class MyAccount extends StatelessWidget {
                           key: _formKey,
                           child: Column(
                             children: [
+                 
+
+                              CustomTextField(
+                                enabled: false,
+                                controller: emailContoller,
+                                hintText: "Email",
+                                prefixIcon: FluentIcons.mail_16_regular,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Please enter your email";
+                                  }
+                                },
+                              ),
+                
+                
+                              15.verticalSpace,
+
+
+
+
+
+
                               // -- FIRST NAME FIELD,
                               CustomTextField(
                                 controller: firstNameContoller,

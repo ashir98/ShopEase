@@ -43,29 +43,26 @@ class WishListPage extends StatelessWidget {
                         itemCount: snapshot.data!.length,
                         shrinkWrap:true, // Add this line to enable scrolling within the GridView
                         itemBuilder: (context, index) {
-                          var id = snapshot.data![index].id;
-                          var name = snapshot.data![index].name;
-                          var imageUrl = snapshot.data![index].imageUrl;
-                          var description = snapshot.data![index].description;
-                          var price = snapshot.data![index].price;
-                          var rating = snapshot.data![index].rating;
-                          var status = snapshot.data![index].status;
-        
+                          ProductModel product = ProductModel(
+                                id: snapshot.data![index].id, 
+                                name: snapshot.data![index].name, 
+                                imageUrl: snapshot.data![index].imageUrl, 
+                                description: snapshot.data![index].description, 
+                                status: snapshot.data![index].status, 
+                                price: snapshot.data![index].price, 
+                                rating: snapshot.data![index].rating
+                              );
         
         
         
                           return Consumer<AppChangeNotifier>(
                             builder:(context, provalue, child) =>  ProductCard(
-                              id: id,
-                              name:  name ,
-                              imageUrl:  imageUrl,
-                              price: price.toDouble(),
-                              rating: rating,
+                              product: product,
                               isFav: true,
                               addToFav: (){
                                 
                                 _fireStoreService
-                                .addToFavourites(id, context)
+                                .addToFavourites(product.id, context)
                                 .then((value){
         
                                   
@@ -75,11 +72,7 @@ class WishListPage extends StatelessWidget {
                               onTap: () {
                                 gotoPage(
                                   ProductDetailPage(
-                                    id: id, 
-                                    name: name, 
-                                    imageUrl: imageUrl,
-                                    description: description,
-                                    rating:  rating,
+                                    product: product,
                             
                                   ), 
                                   context
